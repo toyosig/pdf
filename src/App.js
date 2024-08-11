@@ -6,6 +6,7 @@ import Limited from './pages/Limited';
 import Divine from './pages/Divine';
 import Overthrowing from './pages/Overthrowing';
 import Angel from './pages/Angel';
+import Hymn from './pages/Hymn';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
             <Route path={'/divine'} element={<Divine />} />
             <Route path={'/overthrowing'} element={<Overthrowing />} />
             <Route path={'/angel'} element={<Angel />} />
+            <Route path={'/hymn'} element={<Hymn />} />
 
 
 

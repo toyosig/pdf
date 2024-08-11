@@ -2,7 +2,7 @@ import React from 'react';
 import PdfViewer from '../components/PdfView';
 import pdfFile from '../assets/HYMN.pdf';
 
-const Angel = () => {
+const Hymn = () => {
     return (
         <div className="App">
             <PdfViewer fileUrl={pdfFile} />
@@ -10,4 +10,4 @@ const Angel = () => {
     );
 };
 
-export default Angel;
+export default Hymn;
