@@ -9,7 +9,6 @@ const PdfViewer = ({ fileUrl }) => {
             <Worker workerUrl={`https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js`}>
                 <Viewer 
                     fileUrl={fileUrl}
-                    defaultScale={1.2} // Set an appropriate default scale for clarity
                     theme={{
                         theme: 'light', // Optional: Use a dark theme for better visibility
                     }}
