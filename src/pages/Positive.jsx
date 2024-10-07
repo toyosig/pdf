@@ -1,6 +1,6 @@
 import React from 'react';
 import PdfViewer from '../components/PdfView';
-import pdfFile from '../assets/Change.pdf';
+import pdfFile from '../assets/Positive.pdf';
 
 const Positive = () => {
     return (
