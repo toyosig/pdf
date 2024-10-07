@@ -1,19 +1,19 @@
 import React from 'react';
 import { Worker, Viewer } from '@react-pdf-viewer/core';
+import { pdfjs } from 'react-pdf';
 import '@react-pdf-viewer/core/lib/styles/index.css';
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
 const PdfViewer = ({ fileUrl }) => {
-    // Default layout plugin for better user experience on mobile
-    const defaultLayoutPluginInstance = defaultLayoutPlugin();
-
     return (
-        <div className="h-screen w-full">
+        <div className=" flex justify-center items-center">
             <Worker workerUrl={`https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js`}>
                 <Viewer 
                     fileUrl={fileUrl}
-                    plugins={[defaultLayoutPluginInstance]}  // Add toolbar with zooming support
+                    defaultScale={1.4} // Set an appropriate default scale for clarity
+                    theme={{
+                        theme: 'light', // Optional: Use a dark theme for better visibility
+                    }}
+                    className='h-screen'
                 />
             </Worker>
         </div>
