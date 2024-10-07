@@ -11,7 +11,7 @@ const PdfViewer = ({ fileUrl }) => {
                     fileUrl={fileUrl}
                     defaultScale={1.2} // Set an appropriate default scale for clarity
                     theme={{
-                        theme: 'dark', // Optional: Use a dark theme for better visibility
+                        theme: 'light', // Optional: Use a dark theme for better visibility
                     }}
                 />
             </Worker>
