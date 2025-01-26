@@ -85,7 +85,6 @@ const Hymn = () => {
         <p className="font-medium">
           Page {pageNum} of {numPages}
         </p>
-        <p>To search for various type 'v' and the various number</p>
 
         <button
           onClick={handleNextPage}
@@ -97,6 +96,8 @@ const Hymn = () => {
           Next Page
         </button>
       </div>
+      <p>To search for various type 'v' and the various number</p>
+
 
       {/* Search Section */}
       <div className="flex flex-col items-center gap-2 mb-4">
