@@ -15,52 +15,54 @@ const Hymn = () => {
   };
 
   const handleInputChange = (event) => {
-    const value = event.target.value;
-
-    // Allow empty input or numeric values
-    if (value === '' || /^\d+$/.test(value)) {
-      setInputValue(value);
-    }
+    setInputValue(event.target.value); // Accept any input without restrictions
   };
 
   const handleSearchPage = () => {
-    const inputPage = parseInt(inputValue, 10);
-
-    if (inputValue === '' || isNaN(inputPage) || inputPage < 1 || inputPage > numPages) {
-      setInputValue(pageNum.toString()); // Reset to the current page number if invalid
+    if (inputValue.startsWith('v')) {
+      // Handle virtual page logic (e.g., v1, v2)
+      const virtualPage = parseInt(inputValue.substring(1), 10); // Extract number after 'v'
+      if (!isNaN(virtualPage) && virtualPage >= 1) {
+        const actualPage = 1007 + virtualPage - 1; // Map v1 to 1007, v2 to 1008, etc.
+        setPageNum(actualPage <= numPages ? actualPage : pageNum); // Validate page number
+      }
     } else {
-      let newPage = inputPage;
+      // Handle numeric page logic
+      const inputPage = parseInt(inputValue, 10); // Convert to number
+      if (!isNaN(inputPage) && inputPage >= 1 && inputPage <= numPages) {
+        let newPage = inputPage;
 
-      // Conditional logic: Add specific values based on the page entered
-      if (inputPage === 315) {
-        newPage += 3;
-      } else if (inputPage >= 316 && inputPage < 345) {
-        newPage += 5;
-      } else if (inputPage >= 345 && inputPage <= 1000) {
-        newPage += 6;
+        // Conditional logic for specific pages
+        if (inputPage === 315) {
+          newPage += 3;
+        } else if (inputPage >= 316 && inputPage < 345) {
+          newPage += 5;
+        } else if (inputPage >= 345 && inputPage < 1007) {
+          newPage += 6;
+        }
+
+        setPageNum(newPage <= numPages ? newPage : pageNum); // Ensure page is valid
       }
-
-      // Ensure the newPage is within bounds
-      if (newPage < 1 || newPage > numPages) {
-        newPage = pageNum; // Revert to current page if out of bounds
-      }
-
-      setPageNum(newPage);
-      setInputValue(newPage.toString());
     }
   };
 
   const handleNextPage = () => {
     if (pageNum < numPages) {
       setPageNum((prev) => prev + 1);
-      setInputValue((prev) => (parseInt(prev, 10) + 1).toString());
+      setInputValue((prev) => {
+        const nextPage = parseInt(prev.replace('v', ''), 10) + 1;
+        return pageNum >= 1007 ? `v${nextPage}` : nextPage.toString();
+      });
     }
   };
 
   const handlePreviousPage = () => {
     if (pageNum > 1) {
       setPageNum((prev) => prev - 1);
-      setInputValue((prev) => (parseInt(prev, 10) - 1).toString());
+      setInputValue((prev) => {
+        const prevPage = parseInt(prev.replace('v', ''), 10) - 1;
+        return pageNum > 1007 ? `v${prevPage}` : prevPage.toString();
+      });
     }
   };
 
@@ -83,6 +85,7 @@ const Hymn = () => {
         <p className="font-medium">
           Page {pageNum} of {numPages}
         </p>
+        <p>To search for various type 'v' and the various number</p>
 
         <button
           onClick={handleNextPage}
@@ -101,7 +104,7 @@ const Hymn = () => {
           type="text"
           value={inputValue}
           onChange={handleInputChange}
-          placeholder="Enter page number"
+          placeholder="Enter page number or v1"
           className="p-2 border border-gray-300 rounded w-24 text-center"
         />
 
